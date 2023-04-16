@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _23._04._13
+namespace LevelTest
 {
-    internal class Program
+    internal class InputStringPrintWordNum
     {
-        static void Main(string[] args)
+        public void Func()
         {
             string a = Console.ReadLine();
             int wordsNum = 1;
@@ -22,6 +22,7 @@ namespace _23._04._13
             }
             Console.Write(wordsNum);
         }
+
     }
 }
 
