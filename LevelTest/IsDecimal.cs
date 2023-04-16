@@ -8,21 +8,19 @@ namespace LevelTest
 {
     internal class IsDecimal
     {
-        static void Main(string[] args)
+        public void Func()
         {
             int n = int.Parse(Console.ReadLine());
             Console.Write(IsPrime(n));
         }
         static bool IsPrime(int n)
         {
-            if (n % 1 == 0 || n % 3 == 0 || n % 7 == 0)
+            for (int i = 2; i < n; i++)
             {
-                return true;
+                if (n % i == 0)
+                    return false;
             }
-            else
-            {
-                return false;
-            }
+            return true;
         }
     }
 }
