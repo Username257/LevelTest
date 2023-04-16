@@ -4,7 +4,6 @@
     {
         static void Main(string[] args)
         {
-            
             //문자열 속에 문자 찾기
             Console.WriteLine("문자열 속에 문자 찾기");
             FindWordInString FWIS = new FindWordInString();
@@ -35,6 +34,15 @@
             GameUpNDown GUND = new GameUpNDown();
             GUND.Func();
             
+            //슬라이드 퍼즐 만들기
+            Console.WriteLine("\n\n슬라이드 퍼즐 만들기(방향키, x키 제외 아무 키 입력으로 게임하기)");
+            SlideGame SG = new SlideGame();
+            SG.Func();
+            
+            //빙고 게임 만들기
+            Console.WriteLine("\n\n빙고 게임 만들기");
+            Bingo Bingo = new Bingo();
+            Bingo.Func();
         }
     }
 }
