@@ -11,13 +11,13 @@ namespace LevelTest
         public void Func()
         {
             Console.CursorVisible = true;
-            string[,] pan = new string[5, 5];
-            List<string> list = new List<string>();
+            int[,] pan = new int[5, 5];
+            List<int> list = new List<int>();
 
             while (true)
             {
                 Random random = new Random();
-                string argument = random.Next(1, 26).ToString();
+                int argument = random.Next(1, 26);
                 list.Add(argument);
                 list = list.Distinct().ToList();
                 if (list.Count == 25)
@@ -55,27 +55,27 @@ namespace LevelTest
                     
             }
         }
-        static int GameUpdate(string[,] pan)
+        static int GameUpdate(int[,] pan)
         {
             int bingoCnt = 0;
 
             for(int i = 0; i < 5; i++)
             {
-                if (pan[i, 0] == "0" && pan[i, 1] == "0" && pan[i, 2] == "0" && pan[i, 3] == "0" && pan[i, 4] == "0")
+                if (pan[i, 0] == 0 && pan[i, 1] == 0 && pan[i, 2] == 0 && pan[i, 3] == 0 && pan[i, 4] == 0)
                     bingoCnt++;
-                if (pan[0, i] == "0" && pan[1, i] == "0" && pan[2, i] == "0" && pan[3, i] == "0" && pan[4, i] == "0")
+                if (pan[0, i] == 0 && pan[1, i] == 0 && pan[2, i] == 0 && pan[3, i] == 0 && pan[4, i] == 0)
                     bingoCnt++;
             }
 
-            if (pan[0,0] == "0" && pan[1,1] == "0" && pan[2,2] == "0" && pan[3,3] == "0" && pan[4,4] == "0") //좌측 상단 -> 우측 하단 대각선이 전부 0이면
+            if (pan[0,0] == 0 && pan[1,1] == 0 && pan[2,2] == 0 && pan[3,3] == 0 && pan[4,4] == 0) //좌측 상단 -> 우측 하단 대각선이 전부 0이면
                 bingoCnt++;
             
-            if (pan[0, 4] == "0" && pan[1, 3] == "0" && pan[2, 2] == "0" && pan[3, 1] == "0" && pan[4, 0] == "0") //우측 상단 -> 좌측 하단 대각선이 전부 0이면
+            if (pan[0, 4] == 0 && pan[1, 3] == 0 && pan[2, 2] == 0 && pan[3, 1] == 0 && pan[4, 0] == 0) //우측 상단 -> 좌측 하단 대각선이 전부 0이면
                 bingoCnt++;
 
             return bingoCnt;
         }
-        static void GameInput(string numForCheck, string[,]pan)
+        static void GameInput(string numForCheck, int[,]pan)
         {
             int tryParseResult;
             bool isNum = int.TryParse(numForCheck, out tryParseResult);
@@ -83,20 +83,23 @@ namespace LevelTest
             {
                 Console.Write("1 ~ 25 사이의 숫자만 입력 해 주세요 : ");
                 numForCheck = Console.ReadLine();
+                isNum = int.TryParse(numForCheck, out tryParseResult);
+                if (!string.IsNullOrEmpty(numForCheck) && isNum && tryParseResult <= 25 && tryParseResult >= 1)
+                    break;
             }
 
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (pan[i, j] == numForCheck)
+                    if (pan[i, j] == int.Parse(numForCheck))
                     {
-                        pan[i, j] = "0";
+                        pan[i, j] = 0;
                     }
                 }
             }
         }
-        static void GameRender(string[,] pan, int bingoCnt)
+        static void GameRender(int[,] pan, int bingoCnt)
         {
             Console.Clear();
             Console.WriteLine("☆  B I N G O  G A M E  ☆");
@@ -106,12 +109,12 @@ namespace LevelTest
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("│");
-                if (int.Parse(pan[0, i]) >= 10)
+                if (pan[0, i] >= 10)
                 {
                     Console.Write(" ");
                     Console.Write(pan[0, i]);
                 }
-                else if (int.Parse(pan[0,i]) == 0)
+                else if (pan[0,i] == 0)
                 {
                     Console.Write(" ");
                     Console.Write("X");
@@ -131,12 +134,12 @@ namespace LevelTest
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("│");
-                if (int.Parse(pan[1, i]) >= 10)
+                if (pan[1, i] >= 10)
                 {
                     Console.Write(" ");
                     Console.Write(pan[1, i]);
                 }
-                else if (int.Parse(pan[1, i]) == 0)
+                else if (pan[1, i] == 0)
                 {
                     Console.Write(" ");
                     Console.Write("X");
@@ -156,12 +159,12 @@ namespace LevelTest
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("│");
-                if (int.Parse(pan[2, i]) >= 10)
+                if (pan[2, i] >= 10)
                 {
                     Console.Write(" ");
                     Console.Write(pan[2, i]);
                 }
-                else if (int.Parse(pan[2, i]) == 0)
+                else if (pan[2, i] == 0)
                 {
                     Console.Write(" ");
                     Console.Write("X");
@@ -181,12 +184,12 @@ namespace LevelTest
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("│");
-                if (int.Parse(pan[3, i]) >= 10)
+                if (pan[3, i] >= 10)
                 {
                     Console.Write(" ");
                     Console.Write(pan[3, i]);
                 }
-                else if (int.Parse(pan[3, i]) == 0)
+                else if (pan[3, i] == 0)
                 {
                     Console.Write(" ");
                     Console.Write("X");
@@ -206,12 +209,12 @@ namespace LevelTest
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("│");
-                if (int.Parse(pan[4, i]) >= 10)
+                if (pan[4, i] >= 10)
                 {
                     Console.Write(" ");
                     Console.Write(pan[4, i]);
                 }
-                else if (int.Parse(pan[4, i]) == 0)
+                else if (pan[4, i] == 0)
                 {
                     Console.Write(" ");
                     Console.Write("X");
